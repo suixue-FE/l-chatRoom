@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "root",
+    "password": "li3306",
+    "database": "l_chat_room",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "li3306",
+    "database": "l_chat_room",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
