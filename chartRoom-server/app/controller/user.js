@@ -1,27 +1,41 @@
+/* eslint-disable no-useless-constructor */
 'use strict';
 const Controller = require('egg').Controller;
-
+// /**
+//  * @Controller 用户管理
+//  */
 class UserController extends Controller {
-  // eslint-disable-next-line no-useless-constructor
-  // constructor(ctx) {
-  //   super(ctx);
-  // }
-  /**
-   * @summary 创建用户
-   * @description 创建用户 ，记录用户账户密码和类型
-   * @router post /api/user
-   * @request body createUserRequest
-   * @response 200 baseResponse 创建成功
-   */
-  async getUsers() {
-    const { ctx } = this;
-    // console.log(ctx.params);
-    // const userId = ctx.params.id;
-    // // ctx.body = `user ${ctx.params.userId}`;\
-    // console.log(userId);
-    const userInfo = await ctx.service.user.find(3);
-    ctx.body = userInfo;
+  constructor(ctx) {
+    super(ctx);
   }
+
+  /**
+  * @summary 注册用户
+  * @description 创建用户 ，记录用户账户密码和类型
+  * @router post /api/user
+  * @request body registerUserRequest
+  * @response 200 baseResponse 创建成功
+  */
+  async registerUser() {
+    const { ctx, service } = this;
+    // 校验参数
+    ctx.validate(ctx.rule.createUserRequest);
+    // 组装参数
+    const payload = ctx.request.body || {};
+    // 调用 Service 进行业务处理
+    const res = {};
+    // 设置响应内容和响应状态码
+    ctx.helper.success({ ctx, res });
+  }
+  // async getUsers() {
+  //   const { ctx } = this;
+  //   // console.log(ctx.params);
+  //   // const userId = ctx.params.id;
+  //   // // ctx.body = `user ${ctx.params.userId}`;\
+  //   // console.log(userId);
+  //   const userInfo = await ctx.service.user.find(3);
+  //   ctx.body = userInfo;
+  // }
 }
 
 module.exports = UserController;
