@@ -10,6 +10,10 @@ module.exports = {
       format: /^1[34578]\d{9}$/,
     },
     password: { type: 'string', required: true, description: '密码', example: '111111' },
-    realName: { type: 'string', required: true, description: '姓名', example: 'Tom' },
+    realName: { type: 'string', required: true, description: '姓名/昵称', example: 'Tom' },
+  },
+  delUserRequest: {
+    account: { type: 'string', required: true, description: '账号' },
+    password: { type: 'string', required: true, description: '密码', example: '111111' },
   },
 };

@@ -8,6 +8,15 @@ class UserService extends Service {
     // 就可以直接通过 this.ctx 获取 ctx 了
     // 还可以直接通过 this.app 获取 app 了
   }
+  async registerUser(payload) {
+    // 给密码加密
+    payload.password = await this.ctx.genHash(payload.password);
+    // 用手机号注册就把手机号当做账号
+    if (payload.mobile) {
+      payload.account = payload.mobile;
+    }
+    return this.ctx.model.Users.create(payload);
+  }
   async find(uid) {
     // 假如 我们拿到用户 id 从数据库获取用户详细信息
     // console.log(this.ctx.model);
