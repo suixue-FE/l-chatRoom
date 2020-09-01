@@ -12,7 +12,7 @@ class UserController extends Controller {
   /**
   * @summary 注册用户
   * @description 创建用户 ，记录用户账户密码和类型
-  * @router post /api/user
+  * @router post /api/user/regist
   * @request body registerUserRequest
   * @response 200 baseResponse 创建成功
   */
@@ -31,23 +31,30 @@ class UserController extends Controller {
   /**
    * @summary 注销用户
    * @description 注销用户
-   * @router post /api/deluser
+   * @router post /api/api/del
    * @request body delUserRequest
    * @response 200 baseResponse 注销成功
    */
   async delUser() {
+    const { ctx } = this;
+    // 校验参数
     this.ctx.validate(this.ctx.rule.delUserRequest);
-
+    const payload = ctx.request.body || {};
+    const res = await this.service.user.delUser(payload);
+    ctx.helper.success({ ctx, res });
   }
-  // async getUsers() {
-  //   const { ctx } = this;
-  //   // console.log(ctx.params);
-  //   // const userId = ctx.params.id;
-  //   // // ctx.body = `user ${ctx.params.userId}`;\
-  //   // console.log(userId);
-  //   const userInfo = await ctx.service.user.find(3);
-  //   ctx.body = userInfo;
-  // }
+  /**
+   * @summary 获取单个用户
+   * @description 获取用户信息
+   * @router get /api/user
+   * @request query string id  用户id
+   * @response 200 baseResponse 创建成功
+   */
+  async getUsers() {
+    const { ctx } = this;
+    const res = await ctx.service.user.find(ctx.query.id);
+    ctx.helper.success({ ctx, res });
+  }
 }
 
 module.exports = UserController;

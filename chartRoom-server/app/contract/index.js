@@ -4,7 +4,7 @@ module.exports = {
     id: { type: 'string', description: 'id 唯⼀键', required: true, example: '1' },
   },
   baseResponse: {
-    ccode: { type: 'integer', required: true, example: 0 },
+    code: { type: 'integer', required: true, example: 0 },
     data: { type: 'string', example: '请求成功' },
     message: { type: 'string', example: '请求成功' },
   },

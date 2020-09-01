@@ -2,6 +2,7 @@
 const Service = require('egg').Service;
 class UserService extends Service {
   // 默认不需要提供构造函数。
+  // eslint-disable-next-line no-useless-constructor
   constructor(ctx) {
     super(ctx);
     // 如果需要在构造函数做一些处理，一定要有这句话，才能保证后面 `this.ctx`的使用。
@@ -17,16 +18,18 @@ class UserService extends Service {
     }
     return this.ctx.model.Users.create(payload);
   }
+  async delUser(payload) {
+    const data = await this.ctx.model.Users.destroy({
+      where: { account: payload.account },
+    });
+    return data;
+  }
   async find(uid) {
     // 假如 我们拿到用户 id 从数据库获取用户详细信息
-    // console.log(this.ctx.model);
-    // console.log(this.ctx.model.Users.findAll());
-    const user = await this.ctx.model.Users.findAll();
-
-    // 假定这里还有一些复杂的计算，然后返回需要的信息。
-    // const picture = await this.getPicture(uid);
-
-    return user;
+    const dataValues = await this.ctx.model.Users.findByPk(uid, {
+      attributes: [ 'name', 'id', 'mobile', 'last_login', 'email', 'url', 'creat_time' ],
+    });
+    return dataValues;
   }
 
   // async getPicture(uid) {
