@@ -1,9 +1,9 @@
 /* eslint-disable no-useless-constructor */
 'use strict';
 const Controller = require('egg').Controller;
-// /**
-//  * @Controller 用户管理
-//  */
+/**
+ * @Controller 用户管理
+ */
 class UserController extends Controller {
   constructor(ctx) {
     super(ctx);

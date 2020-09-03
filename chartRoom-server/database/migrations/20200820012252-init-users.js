@@ -13,17 +13,18 @@ module.exports = {
       id: {
         type: INTEGER,
         autoIncrement: true,
-        primaryKey: true },
+        primaryKey: true,
+      },
       name: STRING(64),
-      account:	{ type: STRING(64), primaryKey: true, unique: true },
+      account:	{ type: STRING(64), unique: true },
       mobile:	{ type: STRING(64), unique: true },
       password:	STRING(64),
-      login_count:	INTEGER,
+      login_count:	{ type: Sequelize.DATE },
       last_login:	STRING(64),
       email:	{ type: STRING(64), unique: true },
       url:	STRING(255),
-      creat_time:	STRING(64),
-    });
+      creat_time:	{ type: Sequelize.DATE, defaultValue: Sequelize.NOW },
+    }, { initialAutoIncrement: 10000 });
   },
 
   down: async queryInterface => {

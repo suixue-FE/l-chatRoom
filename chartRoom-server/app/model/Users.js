@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = app => {
-  const { STRING, INTEGER } = app.Sequelize;
+  const { STRING, INTEGER, DATE, NOW } = app.Sequelize;
 
   const Users = app.model.define('users', {
     id: {
@@ -16,9 +16,10 @@ module.exports = app => {
     last_login:	STRING(64),
     email:	{ type: STRING(64), unique: true },
     url:	STRING(255),
-    creat_time:	STRING(64),
+    creat_time:	{ type: DATE, defaultValue: NOW },
   }, {
-    freezeTableName: true, // Model 对应的表名将与model名相同
+    initialAutoIncrement: 10000,
+    freezeTableName: true, // 对应的表名将与model名相同
     timestamps: false,
   });
   console.log('users', Users);
