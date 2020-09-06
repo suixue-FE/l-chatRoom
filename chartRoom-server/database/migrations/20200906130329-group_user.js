@@ -6,29 +6,32 @@ module.exports = {
      * Add altering commands here.
      *
      * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
+     * 群成员表
      */
     const { INTEGER, STRING } = Sequelize;
-    await queryInterface.createTable('user_friend', {
-      id: {
-        type: STRING,
-        primaryKey: true },
-      user_id: { type: INTEGER,
+    await queryInterface.createTable('group_user', {
+      gu_id: {
+        type: INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      gu_group_id:	{
+        type: INTEGER,
         allowNull: false,
         references: {
-          model: 'users',
-          key: 'id',
-        } },
-      friend_id: {
+          model: 'groups',
+          key: 'g_id',
+        },
+      },
+      gu_user_id: {
         type: INTEGER,
         allowNull: false,
         references: {
           model: 'users',
           key: 'id',
-        } },
-      friend_rename: {
-        type: STRING,
+        },
       },
+      gu_user_rename:	STRING(64),
     });
   },
 
@@ -39,6 +42,6 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    await queryInterface.dropTable('user_friend');
+    await queryInterface.dropTable('group_user');
   },
 };

@@ -7,28 +7,33 @@ module.exports = {
      *
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
+     * 群消息表
      */
-    const { INTEGER, STRING } = Sequelize;
-    await queryInterface.createTable('user_friend', {
-      id: {
-        type: STRING,
-        primaryKey: true },
-      user_id: { type: INTEGER,
+    const { INTEGER, DATE, TEXT } = Sequelize;
+    await queryInterface.createTable('g_message', {
+      gm_id: {
+        type: INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      gm_group_id:	{
+        type: INTEGER,
         allowNull: false,
         references: {
-          model: 'users',
-          key: 'id',
-        } },
-      friend_id: {
+          model: 'groups',
+          key: 'g_id',
+        },
+      },
+      gm_user_id: {
         type: INTEGER,
         allowNull: false,
         references: {
           model: 'users',
           key: 'id',
-        } },
-      friend_rename: {
-        type: STRING,
+        },
       },
+      gm_message: TEXT,
+      gm_creat_time:	{ type: DATE, defaultValue: Sequelize.NOW },
     });
   },
 
@@ -39,6 +44,6 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    await queryInterface.dropTable('user_friend');
+    await queryInterface.dropTable('g_message');
   },
 };

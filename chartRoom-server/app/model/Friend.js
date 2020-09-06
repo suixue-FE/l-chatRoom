@@ -7,8 +7,22 @@ module.exports = app => {
     id: {
       type: STRING,
       primaryKey: true },
-    user_id: { type: INTEGER, allowNull: false },
-    friend_id: { type: INTEGER, allowNull: false },
+    user_id: { type: INTEGER,
+      allowNull: false,
+      references: {
+        model: 'users',
+        key: 'id',
+      } },
+    friend_id: {
+      type: INTEGER,
+      allowNull: false,
+      references: {
+        model: 'users',
+        key: 'id',
+      } },
+    friend_rename: {
+      type: STRING,
+    },
   }, {
     freezeTableName: true,
     timestamps: false,

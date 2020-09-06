@@ -8,27 +8,32 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    const { INTEGER, STRING } = Sequelize;
-    await queryInterface.createTable('user_friend', {
-      id: {
-        type: STRING,
-        primaryKey: true },
-      user_id: { type: INTEGER,
-        allowNull: false,
-        references: {
-          model: 'users',
-          key: 'id',
-        } },
-      friend_id: {
+    const { INTEGER, TEXT, DATE, NOW } = Sequelize;
+    await queryInterface.createTable('f_message', {
+      fm_id: {
+        type: INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      fm_from_id: {
         type: INTEGER,
         allowNull: false,
         references: {
           model: 'users',
           key: 'id',
         } },
-      friend_rename: {
-        type: STRING,
+      fm_to_id: {
+        type: INTEGER,
+        allowNull: false,
+        references: {
+          model: 'users',
+          key: 'id',
+        },
       },
+      fm_messages: {
+        type: TEXT,
+      },
+      fm_creat_time:	{ type: DATE, defaultValue: NOW },
     });
   },
 
@@ -39,6 +44,6 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    await queryInterface.dropTable('user_friend');
+    await queryInterface.dropTable('f_message');
   },
 };
