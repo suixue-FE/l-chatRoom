@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = app => {
-  const { STRING, INTEGER, DATE, NOW } = app.Sequelize;
+  const { STRING, INTEGER } = app.Sequelize;
 
   const GroupUser = app.model.define('group_user', {
     gu_id: {
