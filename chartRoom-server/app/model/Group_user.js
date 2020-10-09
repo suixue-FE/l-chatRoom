@@ -3,7 +3,7 @@
 module.exports = app => {
   const { STRING, INTEGER, DATE, NOW } = app.Sequelize;
 
-  const Group_user = app.model.define('group_user', {
+  const GroupUser = app.model.define('group_user', {
     gu_id: {
       type: INTEGER,
       autoIncrement: true,
@@ -30,6 +30,6 @@ module.exports = app => {
     freezeTableName: true,
     timestamps: false,
   });
-  console.log('Group_user', Group_user);
-  return Group_user;
+  console.log('Group_user', GroupUser);
+  return GroupUser;
 };

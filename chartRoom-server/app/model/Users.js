@@ -22,6 +22,22 @@ module.exports = app => {
     freezeTableName: true, // 对应的表名将与model名相同
     timestamps: false,
   });
-  console.log('users', Users);
+  console.log('model', app.model);
+
+  console.log('users_g', app.model.Groups);
+  Users.associate = function() {
+    // One-To-One associations
+    // app.model.User.hasOne(app.model.UserInfo);
+
+    // One-To-Many associations
+    app.model.Users.hasMany(app.model.Friend, {
+      foreignKey: 'user_id',
+    });
+    // app.model.Users.belongsToMany(app.model.Groups, {
+    //   through: app.model.Group_user,
+    //   foreignKey: 'gu_user_id',
+    //   otherKey: 'gu_group_id',
+    // });
+  };
   return Users;
 };

@@ -28,5 +28,11 @@ module.exports = app => {
     timestamps: false,
   });
   console.log('Friend', Friend);
+  Friend.associate = function() {
+    // 与用户是 多对一
+    app.model.Friend.belongsTo(app.model.Users, {
+      foreignKey: 'user_id',
+    });
+  };
   return Friend;
 };

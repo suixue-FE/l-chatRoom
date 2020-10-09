@@ -24,6 +24,14 @@ module.exports = app => {
     freezeTableName: true,
     timestamps: false,
   });
-  console.log('users', Groups);
+  Groups.associate = function() {
+    // 多对多
+    // app.model.Groups.belongsToMany(app.model.Users, {
+    //   through: app.model.Group_user,
+    //   foreignKey: 'gu_group_id',
+    //   otherKey: 'gu_user_id',
+    // });
+  };
+  console.log('groups', Groups);
   return Groups;
 };

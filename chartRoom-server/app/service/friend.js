@@ -16,7 +16,7 @@ class FriendService extends Service {
     const user = await ctx.model.Users.findByPk(userId);
     const friend = await ctx.model.Users.findByPk(friendId);
     if (user && friend) {
-      return this.ctx.model.Friend.create({ user_id: userId, friend_id: friendId, id: `${userId}${friendId}` });
+      return this.ctx.model.Friend.create({ user_id: userId, friend_id: friendId, id: `${userId}${friendId}`, friend_rename: friend.name });
     }
     ctx.throw(404, '当前用户不存在');
   }
@@ -25,10 +25,11 @@ class FriendService extends Service {
    * @param {*} userId 用户id
    */
   async getFriends(userId) {
-    const query = { userId };
+    // const query = { userId };
     return await this.ctx.model.Users.findAll({
-      include: [{ model: this.ctx.model.Friend, where: query }],
-      attributes: [ 'name', 'id', 'email', 'url' ],
+      where: { id: userId },
+      include: [{ model: this.ctx.model.Friend }],
+      // attributes: [ 'name', 'id', 'email', 'url' ],
     });
   }
 }
