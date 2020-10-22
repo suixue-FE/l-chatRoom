@@ -24,12 +24,15 @@ class FriendsController extends Controller {
    * @summary 获取用户好友列表
    * @description 获取用户好友列表
    * @router get /api/getFriends
-   * @request query string userId  用户id
+   * @request query integer currentPage eg:1 当前页
+   * @request query integer pageSize eg:10 单页数量
+   * @request query boolean isPaging eg:true 是否需要翻页
+   * @request query string *userId  用户id
    * @response 200 baseResponse 请求成功
    */
   async getFriends() {
     const { ctx } = this;
-    const res = await ctx.service.friend.getFriends(ctx.query.userId);
+    const res = await ctx.service.friend.getFriends(ctx.query);
     ctx.helper.success({ ctx, res });
   }
 }

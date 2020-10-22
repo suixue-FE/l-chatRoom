@@ -24,12 +24,18 @@ class FriendService extends Service {
    * 获取好友列表
    * @param {*} userId 用户id
    */
-  async getFriends(userId) {
-    // const query = { userId };
-    return await this.ctx.model.Users.findAll({
+  async getFriends(payload) {
+    const { currentPage = 10, pageSize = 1, isPaging, userId } = payload;
+    const { Users, Friend } = this.ctx.model;
+    if (isPaging) {
+      return await this.ctx.helper.findByPage(Users, pageSize, currentPage, {
+        where: { id: userId },
+        include: [{ model: Friend }],
+      });
+    } return await Users.findAndCountAll({
+      distinct: true,
       where: { id: userId },
-      include: [{ model: this.ctx.model.Friend }],
-      // attributes: [ 'name', 'id', 'email', 'url' ],
+      include: [{ model: Friend }],
     });
   }
 }
