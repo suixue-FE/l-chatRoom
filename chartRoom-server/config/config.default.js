@@ -31,6 +31,10 @@ module.exports = appInfo => {
     routerMap: true,
     enable: true,
   };
+  config.jwt = {
+    secret: 'lss-chartServer',
+    enable: true,
+  };
 
   // add your user config here
   const userConfig = {

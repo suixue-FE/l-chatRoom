@@ -31,7 +31,14 @@ class UserService extends Service {
     });
     return dataValues;
   }
-
+  async findByMobile(mobile) {
+    // 通过手机号查找
+    const dataValues = await this.ctx.model.Users.findOne({
+      where: { mobile },
+      attributes: [ 'name', 'id', 'mobile', 'last_login', 'email', 'url', 'creat_time' ],
+    });
+    return dataValues;
+  }
   // async getPicture(uid) {
   //   const result = await this.ctx.curl(`http://photoserver/uid=${uid}`, { dataType: 'json' });
   //   return result.data;
