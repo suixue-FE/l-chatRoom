@@ -10,7 +10,8 @@ class FriendsController extends Controller {
   /**
    * @summary 添加好友
    * @description 用户添加好友
-   * @router get /api/addFriends
+   * @router get /api/friend/add
+   * @Request header string token
    * @request query string userId 用户id
    * @request query string friendId 添加的好友id
    * @response 200 baseResponse 请求成功
@@ -23,7 +24,8 @@ class FriendsController extends Controller {
   /**
    * @summary 获取用户好友列表
    * @description 获取用户好友列表
-   * @router get /api/getFriends
+   * @router get /api/friend/get
+   * @Request header string authorization
    * @request query integer currentPage eg:1 当前页
    * @request query integer pageSize eg:10 单页数量
    * @request query boolean isPaging eg:true 是否需要翻页

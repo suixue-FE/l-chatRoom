@@ -31,11 +31,10 @@ class UserService extends Service {
     });
     return dataValues;
   }
-  async findByMobile(mobile) {
-    // 通过手机号查找
+  async findByAccount(account) {
+    // 通过账号查找
     const dataValues = await this.ctx.model.Users.findOne({
-      where: { mobile },
-      attributes: [ 'name', 'id', 'mobile', 'last_login', 'email', 'url', 'creat_time' ],
+      where: { account },
     });
     return dataValues;
   }

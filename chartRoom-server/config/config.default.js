@@ -34,6 +34,7 @@ module.exports = appInfo => {
   config.jwt = {
     secret: 'lss-chartServer',
     enable: true,
+    match: /^\/api/, // optional
   };
 
   // add your user config here

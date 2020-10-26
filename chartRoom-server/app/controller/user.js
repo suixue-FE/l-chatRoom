@@ -12,7 +12,7 @@ class UserController extends Controller {
   /**
   * @summary 注册用户
   * @description 创建用户 ，记录用户账户密码和类型
-  * @router post /api/user/regist
+  * @router post /bfApi/user/regist
   * @request body registerUserRequest
   * @response 200 baseResponse 创建成功
   */
@@ -31,7 +31,7 @@ class UserController extends Controller {
   /**
    * @summary 注销用户
    * @description 注销用户
-   * @router post /api/api/del
+   * @router post /api/user/del
    * @request body delUserRequest
    * @response 200 baseResponse 注销成功
    */
@@ -46,7 +46,7 @@ class UserController extends Controller {
   /**
    * @summary 获取单个用户
    * @description 获取用户信息
-   * @router get /api/user
+   * @router get /api/user/info
    * @request query string id  用户id
    * @response 200 baseResponse 创建成功
    */
