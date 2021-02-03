@@ -8,7 +8,7 @@ class UserAccessService extends Service {
     console.log(user);
     if (!user) ctx.throw(404, '当前用户不存在');
     const verifyPsw = await ctx.compare(payload.password, user.password);
-    if (!verifyPsw)ctx.throw(404, '用户名或密码错误');
+    if (!verifyPsw) ctx.throw(404, '用户名或密码错误');
     return { token: await service.actionToken.getToken(user.id) };
     // return dataValues;
   }
